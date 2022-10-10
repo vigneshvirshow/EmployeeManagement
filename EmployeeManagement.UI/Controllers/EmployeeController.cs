@@ -23,8 +23,7 @@ namespace EmployeeManagement.UI.Controllers
         {
             try
             {
-                var result = _employeeApiClient.GetAllEmployee();
-                return View( result);
+                return View(_employeeApiClient.GetAllEmployee());
             }
             catch (Exception ex)
             {

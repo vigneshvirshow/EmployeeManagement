@@ -43,7 +43,6 @@ namespace EmployeeManagement.Application.Services
 
         }
 
-
         public bool DeleteEmployee(int id)
         {
 
@@ -85,7 +84,6 @@ namespace EmployeeManagement.Application.Services
         }
 
  
-
 
     }
 }

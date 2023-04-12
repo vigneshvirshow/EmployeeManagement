@@ -32,16 +32,12 @@ namespace EmployeeManagement.Application.Services
 
         public bool UpdateEmployee(EmployeeData employee)
         {
-
             return _employeeRepository.UpdateEmployee(employee);
-
         }
 
         public bool DeleteEmployee(int id)
         {
-
             return _employeeRepository.DeleteEmployee(id);
-
         }
 
         private EmployeeDto ToEmployeeDto(EmployeeData employee)
@@ -52,11 +48,9 @@ namespace EmployeeManagement.Application.Services
                 Name=employee.Name,
                 Department = employee.Department,
                 Age = employee.Age,
-                Address= employee.Address
-                
+                Address= employee.Address 
             };
             return employeeDto;
-
         }
 
         private IEnumerable<EmployeeDto> ToEmployeeDto(IEnumerable<EmployeeData> employees)

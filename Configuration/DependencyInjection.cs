@@ -3,7 +3,6 @@ using EmployeeManagement.Application.Services;
 using EmployeeManagement.DataAccess.Contracts;
 using EmployeeManagement.DataAccess.Repository;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Configuration
 {

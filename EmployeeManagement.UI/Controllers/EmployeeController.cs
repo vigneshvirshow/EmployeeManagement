@@ -1,12 +1,6 @@
-﻿using EmployeeManagement.Application.Contracts;
-using EmployeeManagement.DataAccess.Models;
-using EmployeeManagement.UI.Models;
-using EmployeeManagement.UI.Providers.Contracts;
+﻿using EmployeeManagement.UI.Providers.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.UI.Controllers
 {
@@ -27,12 +21,10 @@ namespace EmployeeManagement.UI.Controllers
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message);
                 return null;
             }
         }
-
 
         /*private IEnumerable<EmployeeViewModel> ToEmployeeViewModel(IEnumerable<EmployeeData> listOfEmployeeData)
         {
@@ -44,13 +36,9 @@ namespace EmployeeManagement.UI.Controllers
                 Name = item.Name,
                 Department = item.Department ,
                 });
-                
             }
             return listOfEmployeeViewModel;
             
         }*/
-
-
     }
-
 }

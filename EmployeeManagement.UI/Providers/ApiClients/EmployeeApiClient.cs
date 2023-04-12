@@ -1,5 +1,4 @@
-﻿using EmployeeManagement.Application.Models;
-using EmployeeManagement.UI.Models;
+﻿using EmployeeManagement.UI.Models;
 using EmployeeManagement.UI.Models.Provider;
 using EmployeeManagement.UI.Providers.Contracts;
 using Newtonsoft.Json;
@@ -28,19 +27,14 @@ namespace EmployeeManagement.UI.Providers.ApiClients
             }
         }
 
-        
-
         public EmployeeDetailedViewModel GetEmployeeById(int id)
         {
             using (var response = _httpClient.GetAsync("https://localhost:44305/api/employee/"+ id).Result)
             {
                 var employee = JsonConvert.DeserializeObject <EmployeeDetailedViewModel>(response.Content.ReadAsStringAsync().Result);
-
                 return  employee;
             }
-
         }
-
 
         public bool InsertEmployee(EmployeeData employee)
         { 
@@ -49,18 +43,14 @@ namespace EmployeeManagement.UI.Providers.ApiClients
             return true; } 
         }
 
-
-        
         public bool UpdateEmployee(EmployeeData employee)
         {
-            
                 var stringContent = new StringContent(JsonConvert.SerializeObject(employee), Encoding.UTF8, "application/json");
                 using (var response = _httpClient.PutAsync("https://localhost:44305/api/employee/update", stringContent).Result)
                 {
                     response.Content.ReadAsStringAsync();
                     return true;
                 };
-            
         }
         public bool DeleteEmployee(int id)
         {
@@ -70,7 +60,6 @@ namespace EmployeeManagement.UI.Providers.ApiClients
                 return true;
             }
         }
-
 
        /* private IEnumerable<EmployeeViewModel> ToEmployeeViewModel(IEnumerable<EmployeeDto> employeeDto)
         {
@@ -82,7 +71,6 @@ namespace EmployeeManagement.UI.Providers.ApiClients
                     Id = item.Id,
                     Name = item.Name,
                     Department = item.Department
-
                 });
 
             }
@@ -98,12 +86,8 @@ namespace EmployeeManagement.UI.Providers.ApiClients
                 Age = employeeDetailedViewModel.Age,
                 Address = employeeDetailedViewModel.Address,
                 Department = employeeDetailedViewModel.Department,
-
             };
             return employeeData;
-
         }*/
-
-
     }
 }

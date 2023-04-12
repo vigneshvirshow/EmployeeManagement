@@ -3,7 +3,6 @@ using EmployeeManagement.DataAccess.Models;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EmployeeManagement.DataAccess.Repository
 {
@@ -15,21 +14,15 @@ namespace EmployeeManagement.DataAccess.Repository
         {
             _sqlConnection = new SqlConnection("Data Source=192.168.0.128\\mssql2016;database=TestDB;user id = frontiersdev;password=frontiers;TrustServerCertificate=True");
         }
-
         public EmployeeData GetEmployeeById(int id)
         {
             
             try
             {
                 _sqlConnection.Open();
-
-
                 var sqlCommand = new SqlCommand(cmdText: "SELECT *FROM EmployeeDetails where Id = @id", _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
-
                 var sqlDataReader = sqlCommand.ExecuteReader();
-
-
                 var employee = new EmployeeData();
                 while (sqlDataReader.Read())
                 {
@@ -38,9 +31,7 @@ namespace EmployeeManagement.DataAccess.Repository
                     employee.Department = (string)sqlDataReader["Department"];
                     employee.Age = (int)sqlDataReader["Age"];
                     employee.Address = (string)sqlDataReader["Address"];
-
                 }
-
                 return employee;
             }
             catch (Exception)
@@ -51,20 +42,15 @@ namespace EmployeeManagement.DataAccess.Repository
             {
                 _sqlConnection.Close();
             }
-
         }
 
         public IEnumerable<EmployeeData> GetEmployees()
         {
             try
             {
-
                 _sqlConnection.Open();
-
                 var sqlCommand = new SqlCommand(cmdText: "select *from EmployeeDetails", _sqlConnection);
-
                 var sqlDataReader = sqlCommand.ExecuteReader();
-
                 var listOfEmployee = new List<EmployeeData>();
 
                 while (sqlDataReader.Read())
@@ -76,7 +62,6 @@ namespace EmployeeManagement.DataAccess.Repository
                         Department = (string)sqlDataReader["Department"],
                         Age = (int)sqlDataReader["Age"],
                         Address = (string)sqlDataReader["Address"],
-
                     });
                 }
                 return listOfEmployee;
@@ -91,15 +76,12 @@ namespace EmployeeManagement.DataAccess.Repository
                 _sqlConnection.Close();
             }
         }
-
         public bool InsertEmployee(EmployeeData employee)
         {
             try
             {
                 _sqlConnection.Open();
-
                 var sqlCommand = new SqlCommand(cmdText: "INSERT INTO EmployeeDetails(Name, Age, Department, Address) VALUES (@name, @age, @department, @address)", _sqlConnection);
-               
                 sqlCommand.Parameters.AddWithValue("name", employee.Name);
                 sqlCommand.Parameters.AddWithValue("department", employee.Department);
                 sqlCommand.Parameters.AddWithValue("age", employee.Age);
@@ -118,7 +100,6 @@ namespace EmployeeManagement.DataAccess.Repository
                 _sqlConnection.Close();
             }
         }
-
         public bool UpdateEmployee(EmployeeData employee)
         {
             try
@@ -145,16 +126,13 @@ namespace EmployeeManagement.DataAccess.Repository
                 _sqlConnection.Close();
             }
         }
-
         public bool DeleteEmployee(int id)
         {
             try
             {
                 _sqlConnection.Open();
-
                 var sqlCommand = new SqlCommand(cmdText: "DELETE FROM EmployeeDetails WHERE Id = @id", _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
-
                 sqlCommand.ExecuteNonQuery();
                 return true;
             }
@@ -168,7 +146,5 @@ namespace EmployeeManagement.DataAccess.Repository
                 _sqlConnection.Close();
             }
         }
-
-
     }
 }

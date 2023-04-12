@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EmployeeManagement.API.Controllers
 {
@@ -27,7 +26,6 @@ namespace EmployeeManagement.API.Controllers
         {
             try
             {
-
                 return Ok(ToEmployeeDetailedViewModel(_employeeService.GetEmployeeById(id)));
             }
             catch (Exception ex)
@@ -46,10 +44,8 @@ namespace EmployeeManagement.API.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
-
         }
 
         [HttpPost]
@@ -60,11 +56,9 @@ namespace EmployeeManagement.API.Controllers
             try
             {
                 return Ok(_employeeService.InsertEmployee(employeeData));
-
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -76,15 +70,12 @@ namespace EmployeeManagement.API.Controllers
             try
             {
                 return Ok(_employeeService.UpdateEmployee(employeeData));
-
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError,ex.Message);
             }
         }
-
 
         [HttpDelete]
         [Route("delete/{id}")]
@@ -96,12 +87,9 @@ namespace EmployeeManagement.API.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-
-        
 
         private EmployeeDetailedViewModel ToEmployeeDetailedViewModel(EmployeeDto employee)
         {
@@ -112,7 +100,6 @@ namespace EmployeeManagement.API.Controllers
                 Department = employee.Department,
                 Age = employee.Age,
                 Address = employee.Address
-
             };
             return employeeDetailedViewModel;
         }
@@ -125,14 +112,11 @@ namespace EmployeeManagement.API.Controllers
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    Department = item.Department,
-                    
+                    Department = item.Department, 
                 });
             
             }
-
             return listOfEmployeeViewModel;
-
         }
     }
 }

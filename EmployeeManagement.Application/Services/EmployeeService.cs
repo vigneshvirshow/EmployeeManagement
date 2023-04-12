@@ -3,7 +3,6 @@ using EmployeeManagement.Application.Models;
 using EmployeeManagement.DataAccess.Contracts;
 using EmployeeManagement.DataAccess.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EmployeeManagement.Application.Services
 {
@@ -18,10 +17,7 @@ namespace EmployeeManagement.Application.Services
 
         public EmployeeDto GetEmployeeById(int id)
         {
-       
-
            return ToEmployeeDto(_employeeRepository.GetEmployeeById(id));
-
         }
         
         public IEnumerable<EmployeeDto> GetEmployees()
@@ -31,8 +27,6 @@ namespace EmployeeManagement.Application.Services
 
         public bool InsertEmployee(EmployeeData employee)
         {
-
-     
             return _employeeRepository.InsertEmployee(employee);
         }
 
@@ -49,7 +43,6 @@ namespace EmployeeManagement.Application.Services
             return _employeeRepository.DeleteEmployee(id);
 
         }
-
 
         private EmployeeDto ToEmployeeDto(EmployeeData employee)
         {
@@ -82,8 +75,5 @@ namespace EmployeeManagement.Application.Services
             }
             return employeeDtoList;
         }
-
- 
-
     }
 }

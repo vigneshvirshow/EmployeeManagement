@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EmployeeManagement.Application.Models
+﻿namespace EmployeeManagement.Application.Models
 {
     public class EmployeeDto
     {

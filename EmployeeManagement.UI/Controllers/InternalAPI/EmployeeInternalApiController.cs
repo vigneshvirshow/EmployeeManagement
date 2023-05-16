@@ -22,15 +22,12 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
         {
             try
             {
-
                 return Ok(_employeeApiClient.GetEmployeeById(id));
             }
             catch (Exception )
             {
-
                 throw;
             }
-
         }
 
         [HttpDelete]
@@ -43,7 +40,6 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message);
                 return null;
             }
@@ -58,7 +54,6 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message);
                 return null;
             }
@@ -74,13 +69,9 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message);
                 return null;
             }
         }
-
     }
-
-
 }

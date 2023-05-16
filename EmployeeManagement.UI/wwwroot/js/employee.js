@@ -42,7 +42,6 @@ function bindEvents() {
                     contentType: "application/json; charset=utf-8",
                     success: function () {
                         location.reload();
-
                     },
                     error: function (error) {
                         console.log(error);
@@ -54,33 +53,18 @@ function bindEvents() {
             }
         });
 
-
     $(".employeeInsert").on("click", function (event) {
         $("#createNewEmployee").show();
 
     });
 
-
-
-
-
-
-
         $("#createNewEmployee").submit(function (event) {
             var insertEmployee = {};
-
-
-
             insertEmployee.Name = $("#name").val();
             insertEmployee.Department = $("#department").val();
             insertEmployee.Age = Number($("#age").val());
             insertEmployee.Address = $("#address").val();
-
-
-
             var data = JSON.stringify(insertEmployee);
-
-
 
             $.ajax({
                 url: ' https://localhost:44383/api/internal/employee/insert',
@@ -104,18 +88,12 @@ function bindEvents() {
     /*$("#updateform").submit(function (event) {
 
         var employeeDetailedViewModel = {};
-
         employeeDetailedViewModel.Id = Number($("#empId").val());
         employeeDetailedViewModel.Name = $("#empName").val();
         employeeDetailedViewModel.Department = $("#empDept").val();
         employeeDetailedViewModel.Age = Number($("#empAge").val());
         employeeDetailedViewModel.Address = $("#empAddress").val();
-
-
-
         var data = JSON.stringify(employeeDetailedViewModel);
-
-
 
         $.ajax({
             url: 'https://localhost:44383/api/internal/employee/update',
@@ -137,8 +115,6 @@ function bindEvents() {
         console.log("clicked");
         var employeeId = event.currentTarget.getAttribute("data-id");
 
-
-
         $.ajax({
             url: 'https://localhost:44383/api/internal/employee/' + employeeId,
             type: 'GET',
@@ -154,6 +130,7 @@ function bindEvents() {
                 console.log(error);
             }
         });
+
         $("#updateform").submit(function (event) {
             console.log("clicked");
             var idUpdate = $("#empId").val();
@@ -161,8 +138,6 @@ function bindEvents() {
             var departmentUpdate = $("#empDept").val();
             var ageUpdate = $("#empAge").val();
             var addressUpdate = $("#empAddress").val();
-
-
 
             let employees = {
                 id: parseInt(idUpdate),
@@ -192,12 +167,7 @@ function bindEvents() {
             });
         });
     });
-
-    
-
- 
 }
-
  
 function hideEmployeeDetailCard() {
     $("#EmployeeCard").hide();
@@ -205,7 +175,6 @@ function hideEmployeeDetailCard() {
 
 function showEmployeeDetailCard() {
     $("#EmployeeCard").show();
-
 }
 
 function hideInsertForm() {

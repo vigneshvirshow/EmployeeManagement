@@ -114,7 +114,6 @@ namespace EmployeeManagement.API.Controllers
                     Name = item.Name,
                     Department = item.Department, 
                 });
-            
             }
             return listOfEmployeeViewModel;
         }

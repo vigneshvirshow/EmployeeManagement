@@ -20,7 +20,7 @@ namespace EmployeeManagement.DataAccess.Repository
             try
             {
                 _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: "SELECT *FROM EmployeeDetails where Id = @id", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: "SELECT *FROM EmployeeDetails WHERE Id = @id", _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
                 var sqlDataReader = sqlCommand.ExecuteReader();
                 var employee = new EmployeeData();
@@ -49,7 +49,7 @@ namespace EmployeeManagement.DataAccess.Repository
             try
             {
                 _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: "select *from EmployeeDetails", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: "SELECT *FROM EmployeeDetails WITH (NOLOCK)", _sqlConnection);
                 var sqlDataReader = sqlCommand.ExecuteReader();
                 var listOfEmployee = new List<EmployeeData>();
 

@@ -19,6 +19,7 @@ namespace EmployeeManagement.DataAccess.Repository
             
             try
             {
+                //CREATE TABLE EmployeeDetails(Id INT Identity(1, 1), Name varchar(20), Age INT, Department varchar(20), Address varchar(50))
                 _sqlConnection.Open();
                 var sqlCommand = new SqlCommand(cmdText: "SELECT *FROM EmployeeDetails WHERE Id = @id", _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);

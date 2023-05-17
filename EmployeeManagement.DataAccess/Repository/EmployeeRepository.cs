@@ -20,7 +20,7 @@ namespace EmployeeManagement.DataAccess.Repository
             try
             {
                 _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: "SELECT *FROM EmployeeDetails WHERE Id = @id", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeById, _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
                 var sqlDataReader = sqlCommand.ExecuteReader();
                 var employee = new EmployeeData();

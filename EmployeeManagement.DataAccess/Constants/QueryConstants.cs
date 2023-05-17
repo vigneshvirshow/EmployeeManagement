@@ -16,6 +16,8 @@
                                                   "END " +
                                                   "SELECT * FROM EmployeeDetails WITH(NOLOCK)";
 
+            public const string GetEmployeeById = "SELECT *FROM EmployeeDetails WHERE Id = @id";
+
             public const string InsertEmployee = "INSERT INTO EmployeeDetails" +
                                                  "(Name, Age, Department, Address)" +
                                                  " VALUES (@name, @age, @department, @address)";

@@ -9,12 +9,12 @@
                                                   "BEGIN " +
                                                   "CREATE TABLE EmployeeDetails(" +
                                                   "Id INT IDENTITY(1,1) PRIMARY KEY," +
-                                                  "Name VARCHAR(20), 	Age INT," +
+                                                  "Name VARCHAR(20)," +
+                                                  "Age INT," +
                                                   "Department VARCHAR(20)," +
-                                                  "Address VARCHAR(50)) " +
+                                                  "Address VARCHAR(50))" +
                                                   "END " +
-                                                  "GO " +
-                                                  "SELECT* FROM EmployeeDetails WITH(NOLOCK)";
+                                                  "SELECT * FROM EmployeeDetails WITH(NOLOCK)";
 
             public const string InsertEmployee = "INSERT INTO EmployeeDetails" +
                                                  "(Name, Age, Department, Address)" +

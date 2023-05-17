@@ -56,17 +56,20 @@ namespace EmployeeManagement.Application.Services
         private IEnumerable<EmployeeDto> ToEmployeeDto(IEnumerable<EmployeeData> employees)
         {
             var employeeDtoList = new List<EmployeeDto>();
-            foreach ( var item in employees)
+            if (employees != null)
             {
-                employeeDtoList.Add(new EmployeeDto()
+                foreach (var item in employees)
                 {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Department = item.Department,
-                    Age = item.Age,
-                    Address = item.Address
-                }) ;
-            }
+                    employeeDtoList.Add(new EmployeeDto()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        Department = item.Department,
+                        Age = item.Age,
+                        Address = item.Address
+                    });
+                }
+            }  
             return employeeDtoList;
         }
     }

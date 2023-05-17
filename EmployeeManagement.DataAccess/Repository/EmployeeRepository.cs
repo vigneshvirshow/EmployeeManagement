@@ -12,14 +12,13 @@ namespace EmployeeManagement.DataAccess.Repository
 
         public EmployeeRepository()
         {
-            _sqlConnection = new SqlConnection("Data Source=192.168.0.128\\mssql2016;database=TestDB;user id = frontiersdev;password=frontiers;TrustServerCertificate=True");
+            _sqlConnection = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;database=MyDB;Integrated Security=True");
         }
         public EmployeeData GetEmployeeById(int id)
         {
             
             try
             {
-                //CREATE TABLE EmployeeDetails(Id INT Identity(1, 1), Name varchar(20), Age INT, Department varchar(20), Address varchar(50))
                 _sqlConnection.Open();
                 var sqlCommand = new SqlCommand(cmdText: "SELECT *FROM EmployeeDetails WHERE Id = @id", _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
@@ -50,7 +49,7 @@ namespace EmployeeManagement.DataAccess.Repository
             try
             {
                 _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: "SELECT *FROM EmployeeDetails WITH (NOLOCK)", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeData, _sqlConnection);
                 var sqlDataReader = sqlCommand.ExecuteReader();
                 var listOfEmployee = new List<EmployeeData>();
 
@@ -82,7 +81,7 @@ namespace EmployeeManagement.DataAccess.Repository
             try
             {
                 _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: "INSERT INTO EmployeeDetails(Name, Age, Department, Address) VALUES (@name, @age, @department, @address)", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.InsertEmployee, _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("name", employee.Name);
                 sqlCommand.Parameters.AddWithValue("department", employee.Department);
                 sqlCommand.Parameters.AddWithValue("age", employee.Age);
@@ -107,7 +106,7 @@ namespace EmployeeManagement.DataAccess.Repository
             {
                 _sqlConnection.Open();
 
-                var sqlCommand = new SqlCommand(cmdText: "UPDATE EmployeeDetails SET Name=@name, Department=@department, Age=@age, Address=@address where Id=@id", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.UpdateEmployee, _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", employee.Id);
                 sqlCommand.Parameters.AddWithValue("name", employee.Name);
                 sqlCommand.Parameters.AddWithValue("department", employee.Department);
@@ -132,7 +131,7 @@ namespace EmployeeManagement.DataAccess.Repository
             try
             {
                 _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: "DELETE FROM EmployeeDetails WHERE Id = @id", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.DeleteEmployee, _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
                 sqlCommand.ExecuteNonQuery();
                 return true;

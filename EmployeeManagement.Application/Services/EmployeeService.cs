@@ -15,14 +15,14 @@ namespace EmployeeManagement.Application.Services
             _employeeRepository = employeeRepository;
         }
 
+        public IEnumerable<EmployeeDto> GetEmployees()
+        {
+            return ToEmployeeDto(_employeeRepository.GetEmployees());
+        }
+
         public EmployeeDto GetEmployeeById(int id)
         {
            return ToEmployeeDto(_employeeRepository.GetEmployeeById(id));
-        }
-        
-        public IEnumerable<EmployeeDto> GetEmployees()
-        {
-           return ToEmployeeDto( _employeeRepository.GetEmployees());
         }
 
         public bool InsertEmployee(EmployeeData employee)

@@ -21,12 +21,12 @@ namespace EmployeeManagement.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public IActionResult GetEmployeeById([FromRoute] int id)
+        [Route("get-all")]
+        public IActionResult GetEmployees()
         {
             try
             {
-                return Ok(ToEmployeeDetailedViewModel(_employeeService.GetEmployeeById(id)));
+                return Ok(ToEmployeeViewModel(_employeeService.GetEmployees()));
             }
             catch (Exception ex)
             {
@@ -35,12 +35,12 @@ namespace EmployeeManagement.API.Controllers
         }
 
         [HttpGet]
-        [Route("get-all")]
-        public IActionResult GetEmployees()
+        [Route("{id}")]
+        public IActionResult GetEmployeeById([FromRoute] int id)
         {
             try
             {
-                return Ok(ToEmployeeViewModel(_employeeService.GetEmployees()));
+                return Ok(ToEmployeeDetailedViewModel(_employeeService.GetEmployeeById(id)));
             }
             catch (Exception ex)
             {

@@ -14,35 +14,6 @@ namespace EmployeeManagement.DataAccess.Repository
         {
             _sqlConnection = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;database=MyDB;Integrated Security=True");
         }
-        public EmployeeData GetEmployeeById(int id)
-        {
-            
-            try
-            {
-                _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeById, _sqlConnection);
-                sqlCommand.Parameters.AddWithValue("id", id);
-                var sqlDataReader = sqlCommand.ExecuteReader();
-                var employee = new EmployeeData();
-                while (sqlDataReader.Read())
-                {
-                    employee.Id = (int)sqlDataReader["Id"];
-                    employee.Name = (string)sqlDataReader["Name"];
-                    employee.Department = (string)sqlDataReader["Department"];
-                    employee.Age = (int)sqlDataReader["Age"];
-                    employee.Address = (string)sqlDataReader["Address"];
-                }
-                return employee;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                _sqlConnection.Close();
-            }
-        }
 
         public IEnumerable<EmployeeData> GetEmployees()
         {
@@ -76,6 +47,36 @@ namespace EmployeeManagement.DataAccess.Repository
                 _sqlConnection.Close();
             }
         }
+
+        public EmployeeData GetEmployeeById(int id)
+        {
+            try
+            {
+                _sqlConnection.Open();
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeById, _sqlConnection);
+                sqlCommand.Parameters.AddWithValue("id", id);
+                var sqlDataReader = sqlCommand.ExecuteReader();
+                var employee = new EmployeeData();
+                while (sqlDataReader.Read())
+                {
+                    employee.Id = (int)sqlDataReader["Id"];
+                    employee.Name = (string)sqlDataReader["Name"];
+                    employee.Department = (string)sqlDataReader["Department"];
+                    employee.Age = (int)sqlDataReader["Age"];
+                    employee.Address = (string)sqlDataReader["Address"];
+                }
+                return employee;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+        }
+
         public bool InsertEmployee(EmployeeData employee)
         {
             try

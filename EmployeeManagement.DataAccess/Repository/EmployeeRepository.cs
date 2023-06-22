@@ -8,19 +8,20 @@ namespace EmployeeManagement.DataAccess.Repository
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private SqlConnection _sqlConnection;
+        private readonly IDbConfigurations _dbConfigurations;
 
-        public EmployeeRepository()
+        public EmployeeRepository(IDbConfigurations dbConfigurations)
         {
-            _sqlConnection = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;database=MyDB;Integrated Security=True");
+            _dbConfigurations = dbConfigurations;
         }
 
         public IEnumerable<EmployeeData> GetEmployees()
         {
             try
             {
-                _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeData, _sqlConnection);
+                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
+                sqlConnection.Open();
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeData, sqlConnection);
                 var sqlDataReader = sqlCommand.ExecuteReader();
                 var listOfEmployee = new List<EmployeeData>();
 
@@ -42,18 +43,15 @@ namespace EmployeeManagement.DataAccess.Repository
                 Console.WriteLine(ex.Message);
                 return null;
             }
-            finally
-            {
-                _sqlConnection.Close();
-            }
         }
 
         public EmployeeData GetEmployeeById(int id)
         {
             try
             {
-                _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeById, _sqlConnection);
+                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
+                sqlConnection.Open();
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeById, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
                 var sqlDataReader = sqlCommand.ExecuteReader();
                 var employee = new EmployeeData();
@@ -71,18 +69,15 @@ namespace EmployeeManagement.DataAccess.Repository
             {
                 throw;
             }
-            finally
-            {
-                _sqlConnection.Close();
-            }
         }
 
         public bool InsertEmployee(EmployeeData employee)
         {
             try
             {
-                _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.InsertEmployee, _sqlConnection);
+                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
+                sqlConnection.Open();
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.InsertEmployee, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("name", employee.Name);
                 sqlCommand.Parameters.AddWithValue("department", employee.Department);
                 sqlCommand.Parameters.AddWithValue("age", employee.Age);
@@ -96,18 +91,14 @@ namespace EmployeeManagement.DataAccess.Repository
                 Console.WriteLine(ex.Message);
                 return false;
             }
-            finally
-            {
-                _sqlConnection.Close();
-            }
         }
         public bool UpdateEmployee(EmployeeData employee)
         {
             try
             {
-                _sqlConnection.Open();
-
-                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.UpdateEmployee, _sqlConnection);
+                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
+                sqlConnection.Open();
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.UpdateEmployee, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", employee.Id);
                 sqlCommand.Parameters.AddWithValue("name", employee.Name);
                 sqlCommand.Parameters.AddWithValue("department", employee.Department);
@@ -122,17 +113,14 @@ namespace EmployeeManagement.DataAccess.Repository
                 Console.WriteLine(ex.Message);
                 return false;
             }
-            finally
-            {
-                _sqlConnection.Close();
-            }
         }
         public bool DeleteEmployee(int id)
         {
             try
             {
-                _sqlConnection.Open();
-                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.DeleteEmployee, _sqlConnection);
+                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
+                sqlConnection.Open();
+                var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.DeleteEmployee, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
                 sqlCommand.ExecuteNonQuery();
                 return true;
@@ -141,10 +129,6 @@ namespace EmployeeManagement.DataAccess.Repository
             {
                 Console.WriteLine(ex.Message);
                 return false;
-            }
-            finally
-            {
-                _sqlConnection.Close();
             }
         }
     }

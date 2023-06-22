@@ -22,6 +22,7 @@ namespace EmployeeManagement.UI.Configuration
             #region DataAccess
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IDbConfigurations, DbConfigurations>();
 
             #endregion
 

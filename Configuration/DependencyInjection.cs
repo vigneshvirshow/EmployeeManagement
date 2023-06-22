@@ -12,6 +12,7 @@ namespace Configuration
         {
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddSingleton<IDbConfigurations, DbConfigurations>();
             return services;
         }
     }

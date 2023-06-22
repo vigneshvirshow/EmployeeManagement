@@ -19,6 +19,7 @@ namespace EmployeeManagement.API.Configuration
             #region DataAccess
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IDbConfigurations, DbConfigurations>();
 
             #endregion
         }

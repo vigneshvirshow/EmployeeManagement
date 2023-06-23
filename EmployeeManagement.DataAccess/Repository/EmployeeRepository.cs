@@ -1,7 +1,6 @@
 ﻿using EmployeeManagement.DataAccess.Contracts;
 using EmployeeManagement.DataAccess.Models;
 using Microsoft.Data.SqlClient;
-using System;
 using System.Collections.Generic;
 
 namespace EmployeeManagement.DataAccess.Repository
@@ -17,9 +16,8 @@ namespace EmployeeManagement.DataAccess.Repository
 
         public IEnumerable<EmployeeData> GetEmployees()
         {
-            try
+            using (var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString))
             {
-                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
                 sqlConnection.Open();
                 var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeData, sqlConnection);
                 var sqlDataReader = sqlCommand.ExecuteReader();
@@ -37,19 +35,13 @@ namespace EmployeeManagement.DataAccess.Repository
                     });
                 }
                 return listOfEmployee;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
+            }       
         }
 
         public EmployeeData GetEmployeeById(int id)
         {
-            try
+            using (var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString))
             {
-                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
                 sqlConnection.Open();
                 var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.GetEmployeeById, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
@@ -64,18 +56,13 @@ namespace EmployeeManagement.DataAccess.Repository
                     employee.Address = (string)sqlDataReader["Address"];
                 }
                 return employee;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            }   
         }
 
         public bool InsertEmployee(EmployeeData employee)
         {
-            try
+            using (var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString))
             {
-                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
                 sqlConnection.Open();
                 var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.InsertEmployee, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("name", employee.Name);
@@ -85,18 +72,12 @@ namespace EmployeeManagement.DataAccess.Repository
 
                 sqlCommand.ExecuteNonQuery();
                 return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
+            } 
         }
         public bool UpdateEmployee(EmployeeData employee)
         {
-            try
+            using (var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString))
             {
-                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
                 sqlConnection.Open();
                 var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.UpdateEmployee, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", employee.Id);
@@ -107,28 +88,17 @@ namespace EmployeeManagement.DataAccess.Repository
 
                 sqlCommand.ExecuteNonQuery();
                 return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
+            }     
         }
         public bool DeleteEmployee(int id)
         {
-            try
+            using (var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString))
             {
-                var sqlConnection = new SqlConnection(_dbConfigurations.ConnectionString);
                 sqlConnection.Open();
                 var sqlCommand = new SqlCommand(cmdText: QueryConstants.EmployeeData.DeleteEmployee, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("id", id);
                 sqlCommand.ExecuteNonQuery();
                 return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
             }
         }
     }

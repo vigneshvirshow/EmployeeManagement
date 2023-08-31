@@ -3,6 +3,7 @@ using EmployeeManagement.Application.Models;
 using EmployeeManagement.DataAccess.Contracts;
 using EmployeeManagement.DataAccess.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EmployeeManagement.Application.Services
 {
@@ -17,7 +18,14 @@ namespace EmployeeManagement.Application.Services
 
         public IEnumerable<EmployeeDto> GetEmployees()
         {
-            return ToEmployeeDto(_employeeRepository.GetEmployees());
+            return _employeeRepository.GetEmployees().Select(x => new EmployeeDto
+            {
+                Address = x.Address,
+                Age = x.Age,
+                Department = x.Department,
+                Id = x.Id,
+                Name = x.Name
+            });
         }
 
         public EmployeeDto GetEmployeeById(int id)

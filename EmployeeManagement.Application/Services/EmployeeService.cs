@@ -18,7 +18,7 @@ namespace EmployeeManagement.Application.Services
 
         public IEnumerable<EmployeeDto> GetEmployees()
         {
-            return _employeeRepository.GetEmployees().Select(x => new EmployeeDto
+            return _employeeRepository.GetEmployees()?.Select(x => new EmployeeDto
             {
                 Address = x.Address,
                 Age = x.Age,
@@ -59,26 +59,6 @@ namespace EmployeeManagement.Application.Services
                 Address= employee.Address 
             };
             return employeeDto;
-        }
-
-        private IEnumerable<EmployeeDto> ToEmployeeDto(IEnumerable<EmployeeData> employees)
-        {
-            var employeeDtoList = new List<EmployeeDto>();
-            if (employees != null)
-            {
-                foreach (var item in employees)
-                {
-                    employeeDtoList.Add(new EmployeeDto()
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Department = item.Department,
-                        Age = item.Age,
-                        Address = item.Address
-                    });
-                }
-            }  
-            return employeeDtoList;
         }
     }
 }

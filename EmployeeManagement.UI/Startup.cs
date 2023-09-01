@@ -1,18 +1,9 @@
-using EmployeeManagement.Application.Contracts;
-using EmployeeManagement.Application.Services;
-using EmployeeManagement.DataAccess.Contracts;
-using EmployeeManagement.DataAccess.Repository;
 using EmployeeManagement.UI.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.UI
 {
